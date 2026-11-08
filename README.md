@@ -110,8 +110,8 @@ node tools/refresh-nodes.mjs <域名> \
 ## 二、快速开始
 
 1. **建 Worker**：Cloudflare 面板 → Workers  → 新建一个 Worker，把 `src/worker.js` 全文粘进去（或者用 wrangler 部署）。
-2. **填必填变量**：Settings → Variables 里加一个 `UUID`，值随便生成一个合法 UUID 就行。
-3. **拿节点**：浏览器打开 `https://你的域名/<UUID>`。
+2. **填必填变量**：Settings → Variables 里加一个 `A`，值就是密码。
+3. **拿节点**：浏览器打开 `https://你的域名/<值>`。
 
 `UUID` 是唯一的必填项。不填的话这个 Worker 对外就是个普通网站，不吐任何节点、不建隧道，所有请求都落到伪装页。根路径 `/` 也已经被锁了，别拿它去取节点，只会看到伪装页。
 
@@ -210,18 +210,10 @@ vless://<UUID>@<IP>:80?encryption=none&security=none&type=ws&host=<你的域名>
 在客户端里填订阅地址就行，同一个地址会根据你的 UA 自动适配格式：
 
 ```
-https://你的域名/<UUID>              # 浏览器/curl 看到明文条目，Clash 系 UA 看到 YAML
-https://你的域名/<UUID>?format=clash  # 强制 YAML
-https://你的域名/<UUID>?format=base64 # 强制 base64
+https://你的域名/<值>              # 浏览器/curl 看到明文条目，Clash 系 UA 看到 YAML
+https://你的域名/<值>?format=clash  # 强制 YAML
+https://你的域名/<值>?format=base64 # 强制 base64
 ```
-
-各客户端建议：
-
-- v2rayN / v2rayNG / NekoBox / Shadowrocket：直接填 `/<UUID>`（明文条目，兼容老客户端）
-- Clash Verge / Mihomo / Stash / Surge / Karing：直接填 `/<UUID>` 就行（UA 自动识别返回 YAML），或者显式加 `?format=clash`
-- 任何支持 base64 订阅的：`/<UUID>?format=base64`
-
-
 
 ---
 
